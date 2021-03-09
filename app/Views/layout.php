@@ -14,7 +14,7 @@
 
 
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
 
 
@@ -70,8 +70,8 @@
     </main><!-- /.container -->
 
 
-    <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
-    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/bootstrap/js/jquery-3.6.0.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
 </body>
