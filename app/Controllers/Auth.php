@@ -38,15 +38,53 @@ class Auth extends BaseController
             $this->session->setFlashdata('errors', $errors);
         }
         return view('register');
-        //menit 22:14
     }
 
     public function login()
     {
+        if ($this->request->getPost()) {
+            $data = $this->request->getPost();
+            // dd($data);
+
+            // validasi
+            $validate = $this->validation->run($data, 'login');
+            $errors = $this->validation->getErrors();
+
+            if ($errors) {
+                return view('login');
+            }
+
+            $userModel = new \App\Models\UserModel();
+
+            $username = $this->request->getPost('username');
+            $password = $this->request->getPost('password');
+
+            $user = $userModel->where('username', $username)->first();
+
+            if ($user) {
+                $salt = $user->salt;
+                if ($user->password !== md5($salt . $password)) {
+                    $this->session->setFlashdata('errors', ['Password Salah']);
+                } else {
+                    $sessData = [
+                        'username'   => $user->username,
+                        'id'         => $user->id,
+                        'isLoggedIn' => true
+                    ];
+                    $this->session->set($sessData);
+
+                    return redirect()->to('/home/index');
+                }
+            } else {
+                $this->session->setFlashdata('errors', ['Username tidak ditemukan']);
+            }
+        }
         return view('login');
     }
 
     public function logout()
     {
+        $this->session->destroy();
+        return redirect()->to('/auth/login');
     }
 }

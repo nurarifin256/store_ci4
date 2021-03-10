@@ -69,7 +69,7 @@ class Validation
 
 	public $login = [
 		'username' => [
-			'rules' => 'requiered'
+			'rules' => 'required'
 		],
 		'password' => [
 			'rules' => 'required'
