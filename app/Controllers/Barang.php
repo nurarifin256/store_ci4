@@ -96,11 +96,15 @@ class Barang extends BaseController
         return view('barang/update', [
             'barang' => $barang
         ]);
-
-        // menit 5:24
     }
 
     public function delete()
     {
+        $id = $this->request->uri->getSegment(3);
+
+        $barangModel = new \App\Models\BarangModel();
+        $delete = $barangModel->delete($id);
+
+        return redirect()->to('/Barang');
     }
 }
