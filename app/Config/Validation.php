@@ -45,7 +45,7 @@ class Validation
 			'rules' => 'required|min_length[5]'
 		],
 		'password' => [
-			'rules' => 'required'
+			'rules' => 'required|min_length[5]|max_length[10]'
 		],
 		'repeatpassword' => [
 			'rules' => 'required|matches[password]'
@@ -59,7 +59,9 @@ class Validation
 			'min_length' => '{field} Minimal Lima Karakter'
 		],
 		'password' => [
-			'required' => '{field} Harus diisi'
+			'required' => '{field} Harus diisi',
+			'min_length' => '{field} Minimal Lima Karakter',
+			'max_length' => '{field} Maksimal 10 karakter'
 		],
 		'repeatpassword' => [
 			'required' => '{field} Harus diisi',
@@ -82,6 +84,66 @@ class Validation
 		],
 		'password' => [
 			'required' => '{field} Harus diisi'
+		]
+	];
+
+	public $barang = [
+		'nama' => [
+			'rules' => 'required|min_length[3]'
+		],
+		'harga' => [
+			'rules' => 'required|is_natural'
+		],
+		'stok' => [
+			'rules' => 'required|is_natural'
+		],
+		'gambar' => [
+			'rules' => 'uploaded[gambar]'
+		]
+	];
+
+	public $barang_errors = [
+		'nama' => [
+			'required'   => '{field} Harus diisi',
+			'min_length' => '{field} Minimal 3 karakter'
+		],
+		'harga' => [
+			'required'   => '{field} Harus diisi',
+			'is_natural' => '{field} Tidak boleh negatif'
+		],
+		'stok' => [
+			'required'   => '{field} Harus diisi',
+			'is_natural' => '{field} Tidak boleh negatif'
+		],
+		'gambar' => [
+			'uploaded' => '{field} belum di pilih'
+		]
+	];
+
+	public $barangupdate = [
+		'nama' => [
+			'rules' => 'required|min_length[3]'
+		],
+		'harga' => [
+			'rules' => 'required|is_natural'
+		],
+		'stok' => [
+			'rules' => 'required|is_natural'
+		]
+	];
+
+	public $barangupdate_errors = [
+		'nama' => [
+			'required'   => '{field} Harus diisi',
+			'min_length' => '{field} Minimal 3 karakter'
+		],
+		'harga' => [
+			'required'   => '{field} Harus diisi',
+			'is_natural' => '{field} Tidak boleh negatif'
+		],
+		'stok' => [
+			'required'   => '{field} Harus diisi',
+			'is_natural' => '{field} Tidak boleh negatif'
 		]
 	];
 }

@@ -2,7 +2,7 @@
     $session = session();
     ?>
     <nav class="navbar navbar-expand-md navbar-dark bg-success fixed-top">
-        <a class="navbar-brand" href="#">Toko Online</a>
+        <a class="navbar-brand" href="#">Toko Online NURARIFIN</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -12,6 +12,13 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="/home/index">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Barang</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                            <a href="/barang/index" class="dropdown-item">List Barang</a>
+                            <a href="/barang/create" class="dropdown-item">Tambah Barang</a>
+                        </div>
                     </li>
                 </ul>
             <?php endif; ?>
