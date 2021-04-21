@@ -13,15 +13,24 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/home/index">Home <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Barang</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown01">
-                            <a href="/barang/index" class="dropdown-item">List Barang</a>
-                            <a href="/barang/create" class="dropdown-item">Tambah Barang</a>
-                        </div>
-                    </li>
+
+                    <?php if (session()->get('role') == 0) : ?>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Barang</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown01">
+                                <a href="/barang/index" class="dropdown-item">List Barang</a>
+                                <a href="/barang/create" class="dropdown-item">Tambah Barang</a>
+                            </div>
+                        </li>
+
+                    <?php else : ?>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/etalase/index">Etalase</a>
+                        </li>
+                    <?php endif ?>
+
                 </ul>
-            <?php endif; ?>
+            <?php endif ?>
             <div class="form-inline my-2 my-lg-0">
                 <div class="navbar-nav mr-auto">
                     <?php if ($session->get('isLoggedIn')) : ?>
