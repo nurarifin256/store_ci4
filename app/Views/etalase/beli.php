@@ -94,7 +94,7 @@ $submit = [
                 <label for="service">Service</label>
                 <select name="" id="service" class="form-control">
                     <option value="">Pilih Service</option>
-                    
+
                 </select>
             </div>
 
@@ -132,5 +132,83 @@ $submit = [
         </div>
     </div>
 </div>
+
+<?= $this->endSection(); ?>
+<?= $this->section('script'); ?>
+
+<script>
+    $('document').ready(function() {
+        var jumlah_pembelian = 1;
+        var harga = <?= $model->harga ?>;
+        var ongkir = 0;
+        $("#provinsi").on('change', function() {
+            $("#kabupaten").empty();
+            var id_province = $(this).val();
+            // console.log(id_province);
+
+            $.ajax({
+                url: "<?= '/etalase/getCity' ?>",
+                type: 'GET',
+                data: {
+                    'id_province': id_province
+                },
+                dataType: 'json',
+                success: function(data) {
+                    // console.log(data);
+                    var results = data["rajaongkir"]["results"];
+                    for (var i = 0; i < results.length; i++) {
+                        $("#kabupaten").append($('<option>', {
+                            value: results[i]["city_id"],
+                            text: results[i]['city_name']
+                        }));
+                    }
+                }
+            })
+        });
+
+        $("#kabupaten").on('change', function() {
+            var id_city = $(this).val();
+            $.ajax({
+                url: "<?= '/etalase/getCost' ?>",
+                type: 'GET',
+                data: {
+                    'origin': 154,
+                    'destination': id_city,
+                    'weight': 1000,
+                    'courier': 'jne'
+                },
+                dataType: 'json',
+                success: function(data) {
+                    // console.log(data);
+                    var results = data["rajaongkir"]["results"][0]["costs"];
+                    for (var i = 0; i < results.length; i++) {
+                        var text = results[i]["description"] + "(" + results[i]["service"] + ")";
+
+                        $("#service").append($('<option>', {
+                            value: results[i]["cost"][0]["value"],
+                            text: text,
+                            etd: results[i]["cost"][0]["etd"]
+                        }));
+                    }
+                }
+            });
+        });
+
+        $("#service").on('change', function() {
+            var estimasi = $('option:selected', this).attr('etd');
+            ongkir = parseInt($(this).val());
+            $("#ongkir").val(ongkir);
+            $("#estimasi").html(estimasi + " Hari");
+            var total_harga = (jumlah_pembelian * harga) + ongkir;
+            $("#total_harga").val(total_harga);
+        });
+
+        $("#jumlah").on('change', function() {
+            jumlah_pembelian = $("#jumlah").val();
+            var total_harga = (jumlah_pembelian * harga) + ongkir;
+            $("#total_harga").val(total_harga);
+        });
+    });
+</script>
 
 <?= $this->endSection(); ?>
