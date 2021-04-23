@@ -23,6 +23,10 @@
                             </div>
                         </li>
 
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/Transaksi/view">Transaksi</a>
+                        </li>
+
                     <?php else : ?>
                         <li class="nav-item active">
                             <a class="nav-link" href="/etalase/index">Etalase</a>
