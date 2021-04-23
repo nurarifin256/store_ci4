@@ -13,6 +13,7 @@ class Transaksi extends BaseController
         helper('form');
         $this->validation = \Config\Services::validation();
         $this->session    = session();
+        $this->email = \Config\Services::email();
     }
 
     public function index()
@@ -80,9 +81,32 @@ class Transaksi extends BaseController
         // output the HTML content
         $pdf->writeHTML($html, true, false, true, false, '');
         //line ini penting
-        $this->response->setContentType('application/pdf');
+        // $this->response->setContentType('application/pdf');
         //Close and output PDF document
-        $pdf->Output('invoice.pdf', 'i');
-        // $this->pdf->Output('invoice.pdf', 'F');
+        // $pdf->Output('invoice.pdf', 'I');
+        $pdf->Output(__DIR__ . '/../../public/uploads/invoice.pdf', 'F');
+
+        // $attachment = '/uploads/invoice.pdf';
+
+        $message = "<h1>Invoice Pembelian</h1><p>kepada " . $pembeli->username . " Berikut Invoice atas pembelian" . $barang->nama . "</p>";
+
+        $this->sendEmail('arifinnur402@gmail.com', 'Invoice', $message);
+
+        return redirect()->to('/transaksi/view');
+    }
+
+    private function sendEmail($to, $tittle, $message)
+    {
+        $this->email->setFrom('arifinnur402@gmail.com', '036 nurarifin');
+        $this->email->setTo($to);
+        $this->email->attach('uploads/invoice.pdf');
+        $this->email->SetSubject($tittle);
+        $this->email->SetMessage($message);
+
+        if (!$this->email->send()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
