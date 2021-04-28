@@ -168,4 +168,10 @@ class Validation
 			'is_natural' => '{field} Tidak boleh negatif'
 		]
 	];
+
+	public $komentar = [
+		'komentar' => [
+			'rules' => 'required'
+		]
+	];
 }
